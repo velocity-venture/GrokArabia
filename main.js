@@ -111,22 +111,30 @@ function initScrollAnimations() {
 // Stripe Payment Integration
 // ===========================
 async function initStripePayment() {
-    // Initialize Stripe
-    // Note: Replace CONFIG.stripePublishableKey with your actual Stripe publishable key
-    try {
-        stripe = Stripe(CONFIG.stripePublishableKey);
-    } catch (error) {
-        console.error('Stripe initialization error:', error);
-        showPaymentMessage('Stripe configuration needed. Please add your Stripe publishable key.', 'error');
+    // Check if Stripe is loaded
+    if (typeof Stripe === 'undefined') {
+        console.warn('Stripe.js not loaded. Payment functionality will be limited.');
+        setupFormWithoutStripe();
         return;
     }
-    
-    // Note: In production, you'll need to:
-    // 1. Create a payment intent on your backend
-    // 2. Return the client secret
-    // 3. Use that client secret to initialize the Payment Element
-    
-    // For now, we'll set up the form submission handler
+
+    // Initialize Stripe only if we have a valid key
+    if (CONFIG.stripePublishableKey && CONFIG.stripePublishableKey !== 'pk_test_YOUR_STRIPE_PUBLISHABLE_KEY') {
+        try {
+            stripe = Stripe(CONFIG.stripePublishableKey);
+            console.log('Stripe initialized successfully');
+        } catch (error) {
+            console.error('Stripe initialization error:', error);
+            setupFormWithoutStripe();
+            return;
+        }
+    } else {
+        console.warn('Stripe publishable key not configured. Using demo mode.');
+        setupFormWithoutStripe();
+    }
+}
+
+function setupFormWithoutStripe() {
     const form = document.getElementById('signupForm');
     if (form) {
         form.addEventListener('submit', handleFormSubmit);
@@ -141,11 +149,11 @@ async function handleFormSubmit(e) {
     
     // Validate form
     const formData = {
-        companyName: document.getElementById('companyName').value.trim(),
-        email: document.getElementById('email').value.trim(),
-        phone: document.getElementById('phone').value.trim(),
-        industry: document.getElementById('industry').value,
-        plan: document.getElementById('plan') ? document.getElementById('plan').value : 'monthly'
+        companyName: document.getElementById('companyName')?.value.trim() || '',
+        email: document.getElementById('email')?.value.trim() || '',
+        phone: document.getElementById('phone')?.value.trim() || '',
+        industry: document.getElementById('industry')?.value || '',
+        plan: document.getElementById('plan')?.value || 'monthly'
     };
     
     // Basic validation
@@ -172,45 +180,41 @@ async function handleFormSubmit(e) {
     }
     
     // Disable submit button
-    submitButton.disabled = true;
-    const originalHTML = submitButton.innerHTML;
-    submitButton.innerHTML = currentLanguage === 'ar' ? 
-        '<i class="fas fa-spinner fa-spin"></i> جاري المعالجة...' : 
-        '<i class="fas fa-spinner fa-spin"></i> Processing...';
-    
-    try {
-        // In production, you would:
-        // 1. Send form data to your backend
-        // 2. Create a Stripe payment intent based on selected plan
-        // 3. Confirm the payment
-        // 4. Handle the response
+    if (submitButton) {
+        submitButton.disabled = true;
+        const originalHTML = submitButton.innerHTML;
+        submitButton.innerHTML = currentLanguage === 'ar' ? 
+            '<i class="fas fa-spinner fa-spin"></i> جاري المعالجة...' : 
+            '<i class="fas fa-spinner fa-spin"></i> Processing...';
         
-        // For demo purposes, we'll simulate a successful submission
-        await simulatePaymentProcessing(formData);
-        
-        // Show success message
-        showPaymentMessage(
-            currentLanguage === 'ar' ? 
-            '✓ تم التسجيل بنجاح! سنتواصل معك قريباً.' : 
-            '✓ Registration successful! We\'ll contact you soon.',
-            'success'
-        );
-        
-        // Reset form
-        document.getElementById('signupForm').reset();
-        
-    } catch (error) {
-        console.error('Payment error:', error);
-        showPaymentMessage(
-            currentLanguage === 'ar' ? 
-            'حدث خطأ أثناء المعالجة. الرجاء المحاولة مرة أخرى.' : 
-            'An error occurred during processing. Please try again.',
-            'error'
-        );
-    } finally {
-        // Re-enable submit button
-        submitButton.disabled = false;
-        submitButton.innerHTML = originalHTML;
+        try {
+            // Simulate payment processing
+            await simulatePaymentProcessing(formData);
+            
+            // Show success message
+            showPaymentMessage(
+                currentLanguage === 'ar' ? 
+                '✓ تم التسجيل بنجاح! سنتواصل معك قريباً.' : 
+                '✓ Registration successful! We\'ll contact you soon.',
+                'success'
+            );
+            
+            // Reset form
+            document.getElementById('signupForm').reset();
+            
+        } catch (error) {
+            console.error('Payment error:', error);
+            showPaymentMessage(
+                currentLanguage === 'ar' ? 
+                'حدث خطأ أثناء المعالجة. الرجاء المحاولة مرة أخرى.' : 
+                'An error occurred during processing. Please try again.',
+                'error'
+            );
+        } finally {
+            // Re-enable submit button
+            submitButton.disabled = false;
+            submitButton.innerHTML = originalHTML;
+        }
     }
 }
 
@@ -249,6 +253,8 @@ function showPaymentMessage(message, type) {
 function lazyLoadImages() {
     const images = document.querySelectorAll('img[data-src]');
     
+    if (images.length === 0) return;
+    
     const imageObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -268,13 +274,7 @@ function lazyLoadImages() {
 // ===========================
 function trackEvent(eventName, eventData) {
     // Placeholder for analytics tracking
-    // Integrate with Google Analytics, Facebook Pixel, etc.
     console.log('Track Event:', eventName, eventData);
-    
-    // Example: Google Analytics
-    // if (typeof gtag !== 'undefined') {
-    //     gtag('event', eventName, eventData);
-    // }
 }
 
 // Track interactions
@@ -316,19 +316,23 @@ function initAnalytics() {
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🚀 GrokArabia - Initializing...');
     
-    // Initialize all features
-    initLanguageToggle();
-    initSmoothScrolling();
-    initScrollAnimations();
-    initStripePayment();
-    lazyLoadImages();
-    initAnalytics();
-    
-    // Set default language display for select elements
-    updateSelectLanguage('industry', currentLanguage);
-    updateSelectLanguage('plan', currentLanguage);
-    
-    console.log('✓ All features initialized successfully');
+    try {
+        // Initialize all features
+        initLanguageToggle();
+        initSmoothScrolling();
+        initScrollAnimations();
+        initStripePayment();
+        lazyLoadImages();
+        initAnalytics();
+        
+        // Set default language display for select elements
+        updateSelectLanguage('industry', currentLanguage);
+        updateSelectLanguage('plan', currentLanguage);
+        
+        console.log('✓ All features initialized successfully');
+    } catch (error) {
+        console.error('Initialization error:', error);
+    }
 });
 
 // ===========================
@@ -351,7 +355,6 @@ function debounce(func, wait) {
 // Handle window resize
 window.addEventListener('resize', debounce(() => {
     // Add any resize-specific logic here
-    console.log('Window resized');
 }, 250));
 
 // Handle page visibility change
@@ -362,58 +365,3 @@ document.addEventListener('visibilitychange', () => {
         console.log('Page visible');
     }
 });
-
-// ===========================
-// IMPORTANT: Stripe Integration Setup
-// ===========================
-/*
-TO COMPLETE STRIPE INTEGRATION:
-
-1. Sign up for Stripe at https://stripe.com
-2. Get your publishable key from the Stripe Dashboard
-3. Replace CONFIG.stripePublishableKey with your actual key
-
-4. Set up a backend endpoint to create payment intents:
-   - POST /create-payment-intent
-   - Should return { clientSecret: "..." }
-
-5. Update the handleFormSubmit function to:
-   a) Call your backend to create a payment intent
-   b) Use the clientSecret to confirm the payment with Stripe
-   c) Handle payment confirmation
-
-Example backend (Node.js/Express):
-```javascript
-app.post('/create-payment-intent', async (req, res) => {
-    const { amount, currency } = req.body;
-    
-    const paymentIntent = await stripe.paymentIntents.create({
-        amount: amount,
-        currency: currency,
-    });
-    
-    res.json({ clientSecret: paymentIntent.client_secret });
-});
-```
-
-Example frontend integration:
-```javascript
-const response = await fetch('/create-payment-intent', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ amount: 9900, currency: 'usd' })
-});
-const { clientSecret } = await response.json();
-
-const { error } = await stripe.confirmPayment({
-    elements,
-    clientSecret,
-    confirmParams: {
-        return_url: 'https://yoursite.com/success',
-    },
-});
-```
-
-For full documentation, visit:
-https://stripe.com/docs/payments/accept-a-payment
-*/
