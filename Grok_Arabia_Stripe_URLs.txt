@@ -1,0 +1,3 @@
+<a href="https://buy.stripe.com/6oU3cvgY24ozcgJ9gH3ks00" class="btn-primary">ابدأ الآن Get Started</a>
+<a href="https://buy.stripe.com/8x24gz4bgaMX80t2Sj3ks01">سنوي – الأفضل Best Value</a>  <!-- Add this new button in pricing -->
+<a href="https://buy.stripe.com/dRmaEX5fk3kvbcF9gH3ks02" class="btn-primary">احجز الآن Reserve Now</a>

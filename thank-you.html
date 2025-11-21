@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Thank you for completing your GrokArabia onboarding">
+    <title>All Set! | GrokArabia</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* Thank You Page Specific Styles */
+        .thank-you-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-primary);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .thank-you-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('images/hero-bg.jpg') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .thank-you-container {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            width: 100%;
+            background: var(--gradient-card);
+            border: 2px solid var(--primary-green);
+            border-radius: 30px;
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: 0 20px 80px rgba(0, 255, 136, 0.3);
+            animation: fadeInScale 0.6s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .celebration-icon {
+            font-size: 8rem;
+            margin-bottom: 30px;
+            animation: celebrationBounce 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes celebrationBounce {
+            from { transform: translateY(0) rotate(-5deg); }
+            to { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .thank-you-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--accent-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .thank-you-message {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            color: var(--text-light);
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .timeline-box {
+            background: rgba(0, 255, 136, 0.1);
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-bottom: 40px;
+        }
+
+        .timeline-box h3 {
+            font-size: 1.8rem;
+            color: var(--primary-green);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .timeline-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            text-align: left;
+        }
+
+        .timeline-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .timeline-step:hover {
+            border-color: var(--primary-green);
+            transform: translateX(10px);
+        }
+
+        .timeline-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-green);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            flex-shrink: 0;
+        }
+
+        .timeline-content h4 {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+
+        .timeline-content p {
+            font-size: 1rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        .timeline-time {
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(0, 255, 136, 0.2);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--primary-green);
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .resources-section {
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .resources-section h3 {
+            font-size: 1.8rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .resource-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            transition: var(--transition);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .resource-card:hover {
+            border-color: var(--primary-green);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+        }
+
+        .resource-icon {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+
+        .resource-card h4 {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+
+        .resource-card p {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            line-height: 1.5;
+        }
+
+        .contact-banner {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(0, 108, 53, 0.2) 0%, rgba(0, 255, 136, 0.1) 100%);
+            border: 2px solid var(--saudi-green);
+            border-radius: 20px;
+        }
+
+        .contact-banner h3 {
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+
+        .contact-methods {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            font-size: 1rem;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .contact-method:hover {
+            background: rgba(0, 255, 136, 0.1);
+            transform: scale(1.05);
+        }
+
+        .contact-method i {
+            color: var(--primary-green);
+            font-size: 1.2rem;
+        }
+
+        .home-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            background: var(--gradient-green);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.4);
+            margin-top: 30px;
+        }
+
+        .home-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.6);
+        }
+
+        /* Language Toggle */
+        .language-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .thank-you-container {
+                padding: 40px 25px;
+            }
+
+            .celebration-icon {
+                font-size: 5rem;
+            }
+
+            .timeline-step {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .timeline-step:hover {
+                transform: translateY(-5px) translateX(0);
+            }
+
+            .timeline-steps {
+                text-align: center;
+            }
+
+            .contact-methods {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you-page">
+        <!-- Language Toggle -->
+        <div class="language-toggle">
+            <button class="lang-btn active" data-lang="ar">العربية</button>
+            <button class="lang-btn" data-lang="en">English</button>
+        </div>
+
+        <div class="thank-you-container">
+            <!-- Celebration Icon -->
+            <div class="celebration-icon">🎉🚀</div>
+
+            <!-- Title -->
+            <h1 class="thank-you-title">
+                <span class="ar-text" dir="rtl">أنت جاهز للانطلاق!</span>
+                <span class="en-text">You're All Set!</span>
+            </h1>
+
+            <!-- Message -->
+            <p class="thank-you-message">
+                <span class="ar-text" dir="rtl">
+                    شكراً لإكمال نموذج التسجيل!<br>
+                    فريقنا يعمل الآن على إعداد وكيلك الذكي المخصص.
+                </span>
+                <span class="en-text">
+                    Thank you for completing the onboarding form!<br>
+                    Our team is now working on setting up your custom AI agent.
+                </span>
+            </p>
+
+            <!-- Timeline Box -->
+            <div class="timeline-box">
+                <h3>
+                    <i class="fas fa-clock"></i>
+                    <span class="ar-text" dir="rtl">الخطوات القادمة</span>
+                    <span class="en-text">Next Steps</span>
+                </h3>
+
+                <div class="timeline-steps">
+                    <!-- Step 1 -->
+                    <div class="timeline-step">
+                        <div class="timeline-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>
+                                <span class="ar-text" dir="rtl">✓ تم استلام طلبك</span>
+                                <span class="en-text">✓ Request Received</span>
+                            </h4>
+                            <p>
+                                <span class="ar-text" dir="rtl">استلمنا معلوماتك وبدأنا المراجعة الفورية</span>
+                                <span class="en-text">We've received your information and started immediate review</span>
+                            </p>
+                            <span class="timeline-time">
+                                <span class="ar-text" dir="rtl">الآن</span>
+                                <span class="en-text">Now</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="timeline-step">
+                        <div class="timeline-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>
+                                <span class="ar-text" dir="rtl">تصميم وكيلك المخصص</span>
+                                <span class="en-text">Custom Agent Design</span>
+                            </h4>
+                            <p>
+                                <span class="ar-text" dir="rtl">فريقنا يصمم وكيلك بناءً على احتياجات عملك الخاصة</span>
+                                <span class="en-text">Our team is designing your agent based on your specific business needs</span>
+                            </p>
+                            <span class="timeline-time">
+                                <span class="ar-text" dir="rtl">خلال 12-24 ساعة</span>
+                                <span class="en-text">Within 12-24 hours</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="timeline-step">
+                        <div class="timeline-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>
+                                <span class="ar-text" dir="rtl">اتصال مباشر من فريقنا</span>
+                                <span class="en-text">Direct Call from Our Team</span>
+                            </h4>
+                            <p>
+                                <span class="ar-text" dir="rtl">سنتصل بك لتأكيد التفاصيل وجدولة جلسة الإعداد الخاصة بك</span>
+                                <span class="en-text">We'll call you to confirm details and schedule your setup session</span>
+                            </p>
+                            <span class="timeline-time">
+                                <span class="ar-text" dir="rtl">خلال 24 ساعة</span>
+                                <span class="en-text">Within 24 hours</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="timeline-step">
+                        <div class="timeline-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>
+                                <span class="ar-text" dir="rtl">إطلاق وكيلك الذكي</span>
+                                <span class="en-text">Launch Your AI Agent</span>
+                            </h4>
+                            <p>
+                                <span class="ar-text" dir="rtl">وكيلك جاهز للعمل! نبدأ التدريب والتكامل مع أنظمتك</span>
+                                <span class="en-text">Your agent is ready to work! We'll start training and system integration</span>
+                            </p>
+                            <span class="timeline-time">
+                                <span class="ar-text" dir="rtl">خلال 48-72 ساعة</span>
+                                <span class="en-text">Within 48-72 hours</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resources Section -->
+            <div class="resources-section">
+                <h3>
+                    <span class="ar-text" dir="rtl">في الانتظار، استكشف المزيد</span>
+                    <span class="en-text">While You Wait, Explore More</span>
+                </h3>
+
+                <div class="resources-grid">
+                    <a href="/#features" class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h4>
+                            <span class="ar-text" dir="rtl">ميزات الوكلاء</span>
+                            <span class="en-text">Agent Features</span>
+                        </h4>
+                        <p>
+                            <span class="ar-text" dir="rtl">اكتشف جميع قدرات وكيلك الذكي</span>
+                            <span class="en-text">Discover all your AI agent's capabilities</span>
+                        </p>
+                    </a>
+
+                    <a href="/#demo" class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                        <h4>
+                            <span class="ar-text" dir="rtl">فيديو توضيحي</span>
+                            <span class="en-text">Demo Video</span>
+                        </h4>
+                        <p>
+                            <span class="ar-text" dir="rtl">شاهد الوكيل الذكي في العمل</span>
+                            <span class="en-text">Watch the AI agent in action</span>
+                        </p>
+                    </a>
+
+                    <a href="/#pricing" class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h4>
+                            <span class="ar-text" dir="rtl">مزايا خطتك</span>
+                            <span class="en-text">Your Plan Benefits</span>
+                        </h4>
+                        <p>
+                            <span class="ar-text" dir="rtl">راجع كل ما يشمله اشتراكك</span>
+                            <span class="en-text">Review everything included in your subscription</span>
+                        </p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Contact Banner -->
+            <div class="contact-banner">
+                <h3>
+                    <span class="ar-text" dir="rtl">تحتاج للمساعدة؟ نحن هنا!</span>
+                    <span class="en-text">Need Help? We're Here!</span>
+                </h3>
+                <div class="contact-methods">
+                    <a href="/cdn-cgi/l/email-protection#355c5b535a7552475a5e544754575c541b565a58" class="contact-method">
+                        <i class="fas fa-envelope"></i>
+                        <span><span class="__cf_email__" data-cfemail="5831363e37183f2a3733392a393a3139763b3735">[email&#160;protected]</span></span>
+                    </a>
+                    <a href="tel:+966xxxxxxxxx" class="contact-method">
+                        <i class="fas fa-phone"></i>
+                        <span>+966 xx xxx xxxx</span>
+                    </a>
+                    <a href="https://wa.me/966xxxxxxxxx" class="contact-method" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        <span class="ar-text" dir="rtl">واتساب</span>
+                        <span class="en-text">WhatsApp</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Home Button -->
+            <a href="/" class="home-button">
+                <i class="fas fa-home"></i>
+                <span class="ar-text" dir="rtl">العودة للصفحة الرئيسية</span>
+                <span class="en-text">Back to Home</span>
+            </a>
+        </div>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Language Toggle
+        let currentLanguage = 'ar';
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const lang = btn.getAttribute('data-lang');
+                currentLanguage = lang;
+                
+                if (lang === 'en') {
+                    document.body.classList.add('lang-en');
+                } else {
+                    document.body.classList.remove('lang-en');
+                }
+            });
+        });
+
+        // Confetti effect (optional - can remove if too much)
+        console.log('🎉 Onboarding complete! Welcome to GrokArabia!');
+    </script>
+</body>
+</html>

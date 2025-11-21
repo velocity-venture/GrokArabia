@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Payment successful - Complete your GrokArabia onboarding">
+    <title>Payment Successful | GrokArabia</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* Success Page Specific Styles */
+        .success-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-primary);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .success-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('images/hero-bg.jpg') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .success-container {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            width: 100%;
+            background: var(--gradient-card);
+            border: 2px solid var(--primary-green);
+            border-radius: 30px;
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: 0 20px 80px rgba(0, 255, 136, 0.3);
+            animation: fadeInScale 0.6s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .success-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            background: var(--gradient-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: checkmarkPop 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes checkmarkPop {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .success-icon i {
+            font-size: 4rem;
+            color: var(--primary-dark);
+        }
+
+        .success-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--accent-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .success-message {
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            color: var(--text-gray);
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .redirect-info {
+            background: rgba(0, 255, 136, 0.1);
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .redirect-info h3 {
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .redirect-info p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .countdown-timer {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary-green);
+            margin: 20px 0;
+            animation: pulse 1s infinite;
+        }
+
+        .form-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 50px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            background: var(--gradient-green);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 10px 40px rgba(0, 255, 136, 0.4);
+            margin-bottom: 20px;
+        }
+
+        .form-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0, 255, 136, 0.6);
+        }
+
+        .form-button i {
+            font-size: 1.5rem;
+        }
+
+        .what-happens-next {
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .what-happens-next h3 {
+            font-size: 1.8rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            text-align: center;
+        }
+
+        .step-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            transition: var(--transition);
+        }
+
+        .step-item:hover {
+            border-color: var(--primary-green);
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary-dark);
+        }
+
+        .step-item h4 {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+
+        .step-item p {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        .support-info {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(0, 108, 53, 0.1);
+            border: 1px solid var(--saudi-green);
+            border-radius: 15px;
+        }
+
+        .support-info i {
+            color: var(--primary-green);
+            margin-right: 10px;
+        }
+
+        .support-info p {
+            font-size: 1rem;
+            color: var(--text-gray);
+            margin: 5px 0;
+        }
+
+        .loading-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .loading-progress {
+            height: 100%;
+            background: var(--gradient-green);
+            animation: loadingProgress 5s linear;
+            border-radius: 10px;
+        }
+
+        @keyframes loadingProgress {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+
+        /* Language Toggle */
+        .language-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .success-container {
+                padding: 40px 25px;
+            }
+
+            .success-icon {
+                width: 90px;
+                height: 90px;
+            }
+
+            .success-icon i {
+                font-size: 3rem;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="success-page">
+        <!-- Language Toggle -->
+        <div class="language-toggle">
+            <button class="lang-btn active" data-lang="ar">العربية</button>
+            <button class="lang-btn" data-lang="en">English</button>
+        </div>
+
+        <div class="success-container">
+            <!-- Success Icon -->
+            <div class="success-icon">
+                <i class="fas fa-check"></i>
+            </div>
+
+            <!-- Success Title -->
+            <h1 class="success-title">
+                <span class="ar-text" dir="rtl">تم الدفع بنجاح! 🎉</span>
+                <span class="en-text">Payment Successful! 🎉</span>
+            </h1>
+
+            <!-- Success Message -->
+            <p class="success-message">
+                <span class="ar-text" dir="rtl">
+                    شكراً لانضمامك إلى GrokArabia!<br>
+                    أنت الآن على بُعد خطوة واحدة من إطلاق وكيلك الذكي.
+                </span>
+                <span class="en-text">
+                    Thank you for joining GrokArabia!<br>
+                    You're now one step away from launching your AI agent.
+                </span>
+            </p>
+
+            <!-- Redirect Info Box -->
+            <div class="redirect-info">
+                <h3>
+                    <i class="fas fa-clipboard-list"></i>
+                    <span class="ar-text" dir="rtl">الخطوة التالية: أكمل نموذج التسجيل</span>
+                    <span class="en-text">Next Step: Complete Onboarding Form</span>
+                </h3>
+                
+                <p>
+                    <span class="ar-text" dir="rtl">سيتم نقلك تلقائياً إلى نموذج التسجيل خلال:</span>
+                    <span class="en-text">You'll be automatically redirected to the onboarding form in:</span>
+                </p>
+
+                <div class="countdown-timer" id="countdown">5</div>
+
+                <div class="loading-bar">
+                    <div class="loading-progress"></div>
+                </div>
+
+                <p style="margin-top: 20px; font-size: 0.9rem;">
+                    <span class="ar-text" dir="rtl">أو انقر على الزر أدناه للانتقال الآن</span>
+                    <span class="en-text">Or click the button below to proceed now</span>
+                </p>
+            </div>
+
+            <!-- Form Button -->
+            <a href="https://forms.gle/M7nZrGTeCEv5ZrvK7" class="form-button" id="formButton">
+                <i class="fas fa-arrow-right"></i>
+                <span class="ar-text" dir="rtl">انتقل إلى نموذج التسجيل</span>
+                <span class="en-text">Go to Onboarding Form</span>
+            </a>
+
+            <!-- What Happens Next -->
+            <div class="what-happens-next">
+                <h3>
+                    <span class="ar-text" dir="rtl">ماذا يحدث بعد ذلك؟</span>
+                    <span class="en-text">What Happens Next?</span>
+                </h3>
+
+                <div class="steps-grid">
+                    <!-- Step 1 -->
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <h4>
+                            <span class="ar-text" dir="rtl">أكمل النموذج</span>
+                            <span class="en-text">Complete Form</span>
+                        </h4>
+                        <p>
+                            <span class="ar-text" dir="rtl">أخبرنا عن عملك واحتياجاتك (3-5 دقائق)</span>
+                            <span class="en-text">Tell us about your business and needs (3-5 min)</span>
+                        </p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <h4>
+                            <span class="ar-text" dir="rtl">نراجع معلوماتك</span>
+                            <span class="en-text">We Review</span>
+                        </h4>
+                        <p>
+                            <span class="ar-text" dir="rtl">فريقنا يراجع طلبك ويصمم وكيلك المخصص</span>
+                            <span class="en-text">Our team reviews your request and designs your custom agent</span>
+                        </p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <h4>
+                            <span class="ar-text" dir="rtl">نتواصل معك</span>
+                            <span class="en-text">We Contact You</span>
+                        </h4>
+                        <p>
+                            <span class="ar-text" dir="rtl">سنتواصل خلال 24 ساعة لجدولة الإعداد</span>
+                            <span class="en-text">We'll reach out within 24 hours to schedule setup</span>
+                        </p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <h4>
+                            <span class="ar-text" dir="rtl">ابدأ الاستخدام</span>
+                            <span class="en-text">Start Using</span>
+                        </h4>
+                        <p>
+                            <span class="ar-text" dir="rtl">وكيلك الذكي جاهز للعمل في عملك!</span>
+                            <span class="en-text">Your AI agent is ready to work in your business!</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Support Info -->
+            <div class="support-info">
+                <p>
+                    <i class="fas fa-question-circle"></i>
+                    <span class="ar-text" dir="rtl">هل لديك أسئلة؟ راسلنا على:</span>
+                    <span class="en-text">Have questions? Contact us:</span>
+                </p>
+                <p>
+                    <i class="fas fa-envelope"></i>
+                    <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d1b8bfb7be91b6a3bebab0a3b0b3b8b0ffb2bebc">[email&#160;protected]</a></strong>
+                </p>
+                <p>
+                    <i class="fas fa-phone"></i>
+                    <strong>+966 xx xxx xxxx</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Language Toggle
+        let currentLanguage = 'ar';
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const lang = btn.getAttribute('data-lang');
+                currentLanguage = lang;
+                
+                if (lang === 'en') {
+                    document.body.classList.add('lang-en');
+                } else {
+                    document.body.classList.remove('lang-en');
+                }
+            });
+        });
+
+        // Countdown Timer and Auto-Redirect
+        let countdown = 5;
+        const countdownElement = document.getElementById('countdown');
+        const formUrl = 'https://forms.gle/M7nZrGTeCEv5ZrvK7';
+
+        const timer = setInterval(() => {
+            countdown--;
+            countdownElement.textContent = countdown;
+
+            if (countdown <= 0) {
+                clearInterval(timer);
+                window.location.href = formUrl;
+            }
+        }, 1000);
+
+        // Manual button click
+        document.getElementById('formButton').addEventListener('click', (e) => {
+            clearInterval(timer);
+        });
+
+        // Track page view
+        console.log('✓ Payment successful - Redirecting to onboarding form');
+    </script>
+</body>
+</html>
