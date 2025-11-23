@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="GrokArabia - First 100% Saudi AI Agents for businesses across Saudi Arabia and GCC. Custom AI agents for e-commerce, real estate, HR, oil/gas, and finance sectors.">
-    <meta name="keywords" content="Saudi AI agents, Arabic AI, GrokArabia, Saudi Arabia artificial intelligence, Gulf AI agents, MENA AI marketplace">
-    <title>GrokArabia | أول وكلاء ذكاء اصطناعي سعودي 100%</title>
+    <meta name="description" content="Sayada - The Sovereign Data Infrastructure for Saudi Arabia. Arabic AI Agents for Saudi/GCC businesses in e-commerce, real estate, HR, and oil/gas with complete data sovereignty.">
+    <meta name="keywords" content="Sayada Saudi AI agents, Arabic AI, Saudi Arabia artificial intelligence, Sovereign Data Infrastructure, Gulf AI agents, MENA AI marketplace">
+    <title>Sayada | البنية التحتية السيادية للبيانات في المملكة</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,14 +18,7 @@
     <!-- Stripe -->
     <script src="https://js.stripe.com/v3/"></script>
     
-    <link rel="stylesheet" href="style.css">
-    
-    <!-- Favicons -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <!-- Hero Section -->
@@ -40,34 +33,42 @@
 
             <div class="hero-text">
                 <!-- Arabic (Primary) -->
-                <h1 class="headline-ar ar-text" lang="ar" dir="rtl">
-                    أول وكلاء ذكاء اصطناعي سعودي 100%<br>
-                    مصمم خصيصاً للأعمال السعودية والخليجية
+                <h1 class="headline-ar" lang="ar" dir="rtl">
+                    سيادة: البنية التحتية السيادية للبيانات<br>
+                    ذكاء اصطناعي عربي متقدم للشركات السعودية
                 </h1>
                 
                 <!-- English -->
-                <h2 class="headline-en en-text">
-                    GrokArabia – First 100% Saudi AI Agents<br>
-                    Built for Saudi & GCC Businesses
+                <h2 class="headline-en">
+                    Sayada: The Sovereign Data Infrastructure<br>
+                    for Saudi Businesses
                 </h2>
                 
                 <p class="hero-subtitle">
-                    <span class="ar-text" dir="rtl">منصة سيادية للذكاء الاصطناعي العربي - بيانات محلية 100%</span><br>
-                    <span class="en-text">Sovereign Arabic AI Platform - 100% Local Data</span>
+                    <span class="ar-text" dir="rtl">بنية تحتية سيادية كاملة للبيانات في المملكة</span><br>
+                    <span class="en-text">Complete Sovereign Data Infrastructure in the Kingdom</span>
                 </p>
                 
                 <p class="hero-description">
-                    <span class="en-text">Launch now—save 40+ hrs/week on operations</span><br>
+                    <span class="en-text">Launching now—save 40+ hrs/week on ops</span><br>
                     <span class="ar-text" dir="rtl">وفر أكثر من 40 ساعة أسبوعياً في عملياتك</span>
                 </p>
                 
-                <a href="#pricing" class="cta-link">
-                    <button class="cta-button" id="ctaButton">
-                        <i class="fas fa-rocket"></i>
-                        <span class="en-text">View Pricing & Get Started</span>
-                        <span class="ar-text" dir="rtl">شاهد الأسعار وابدأ الآن</span>
-                    </button>
-                </a>
+<a href="https://buy.stripe.com/6oU3cvgY24ozcgJ9gH3ks00" 
+   target="_blank" 
+   rel="noopener noreferrer">
+    <button class="cta-button" id="ctaButton">
+        <i class="fas fa-rocket"></i>
+        <span class="en-text">Reserve Spot – Only 50 Early Access ($99/mo)</span>
+        <span class="ar-text" dir="rtl">احجز مكانك – فقط 50 مقعد للوصول المبكر (99$ شهرياً)</span>
+    </button>
+</a>
+                <div class="urgency-badge">
+                    <i class="fas fa-fire"></i>
+                    <span class="countdown" id="countdown">47</span>
+                    <span class="en-text">spots left</span>
+                    <span class="ar-text" dir="rtl">مقعد متبقي</span>
+                </div>
             </div>
         </div>
         
@@ -208,8 +209,8 @@
     <section class="demo" id="demo">
         <div class="container">
             <h2 class="section-title">
-                <span class="ar-text" dir="rtl">شاهد GrokArabia في العمل</span>
-                <span class="en-text">See GrokArabia in Action</span>
+                <span class="ar-text" dir="rtl">شاهد سيادة في العمل</span>
+                <span class="en-text">See Sayada in Action</span>
             </h2>
             
             <p class="section-subtitle">
@@ -229,6 +230,11 @@
                             <span class="en-text">* Upload your demo video here (20 seconds)</span>
                         </p>
                     </div>
+                    <!-- Uncomment and add your video URL when ready -->
+                    <!-- <video controls playsinline webkit-playsinline>
+                        <source src="your-video-url.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video> -->
                 </div>
                 
                 <div class="demo-features">
@@ -266,207 +272,130 @@
         </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section class="pricing" id="pricing">
+    <!-- Signup/Payment Form Section -->
+    <section class="signup" id="signup">
         <div class="container">
-            <h2 class="section-title">
-                <span class="ar-text" dir="rtl">خطط تسعير مرنة لكل الأعمال</span>
-                <span class="en-text">Flexible Pricing Plans for Every Business</span>
-            </h2>
-            
-            <p class="section-subtitle">
-                <span class="ar-text" dir="rtl">اختر الخطة المناسبة لعملك - بدون رسوم خفية</span>
-                <span class="en-text">Choose the plan that fits your business - No hidden fees</span>
-            </p>
-
-            <div class="pricing-grid">
-                <!-- Monthly Plan -->
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3 class="ar-text" dir="rtl">الخطة الشهرية</h3>
-                        <h3 class="en-text">Monthly Plan</h3>
+            <div class="signup-card">
+                <div class="signup-header">
+                    <h2>
+                        <span class="ar-text" dir="rtl">احجز مكانك الآن</span>
+                        <span class="en-text">Reserve Your Spot Now</span>
+                    </h2>
+                    <p class="limited-offer">
+                        <i class="fas fa-bolt"></i>
+                        <span class="ar-text" dir="rtl">أول 50 شركة تحصل على إعداد وكيل مخصص مجاناً</span>
+                        <span class="en-text">First 50 companies get FREE custom agent setup</span>
+                    </p>
+                </div>
+                
+                <form id="signupForm" class="signup-form">
+                    <div class="form-group">
+                        <label for="companyName">
+                            <span class="ar-text" dir="rtl">اسم الشركة</span>
+                            <span class="en-text">Company Name</span>
+                        </label>
+                        <input type="text" id="companyName" name="companyName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">
+                            <span class="ar-text" dir="rtl">البريد الإلكتروني</span>
+                            <span class="en-text">Email Address</span>
+                        </label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">
+                            <span class="ar-text" dir="rtl">رقم الجوال</span>
+                            <span class="en-text">Phone Number</span>
+                        </label>
+                        <input type="tel" id="phone" name="phone" required placeholder="+966">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="industry">
+                            <span class="ar-text" dir="rtl">القطاع</span>
+                            <span class="en-text">Industry</span>
+                        </label>
+                        <select id="industry" name="industry" required>
+                            <option value="">
+                                <span class="ar-text" dir="rtl">اختر القطاع</span>
+                                <span class="en-text">Select Industry</span>
+                            </option>
+                            <option value="ecommerce" class="ar-text" dir="rtl">التجارة الإلكترونية</option>
+                            <option value="ecommerce" class="en-text">E-Commerce</option>
+                            <option value="realestate" class="ar-text" dir="rtl">العقارات</option>
+                            <option value="realestate" class="en-text">Real Estate</option>
+                            <option value="hr" class="ar-text" dir="rtl">الموارد البشرية</option>
+                            <option value="hr" class="en-text">HR & Recruitment</option>
+                            <option value="oilgas" class="ar-text" dir="rtl">النفط والغاز</option>
+                            <option value="oilgas" class="en-text">Oil & Gas</option>
+                            <option value="finance" class="ar-text" dir="rtl">التمويل</option>
+                            <option value="finance" class="en-text">Finance</option>
+                            <option value="other" class="ar-text" dir="rtl">أخرى</option>
+                            <option value="other" class="en-text">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="pricing-info">
                         <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">99</span>
+                            <span class="amount">$99</span>
                             <span class="period">/mo</span>
                         </div>
+                        <p class="price-details">
+                            <span class="ar-text" dir="rtl">✓ وكيل مخصص لقطاعك<br>✓ دعم فني متواصل<br>✓ تحديثات مجانية</span>
+                            <span class="en-text">✓ Custom agent for your sector<br>✓ 24/7 technical support<br>✓ Free updates</span>
+                        </p>
                     </div>
-                    <ul class="pricing-features">
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span class="ar-text" dir="rtl">وكيل ذكي مخصص واحد</span>
-                            <span class="en-text">1 Custom AI Agent</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span class="ar-text" dir="rtl">10,000 محادثة شهرياً</span>
-                            <span class="en-text">10,000 conversations/month</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span class="ar-text" dir="rtl">دعم فني على مدار الساعة</span>
-                            <span class="en-text">24/7 Technical Support</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span class="ar-text" dir="rtl">تكامل مع أنظمتك الحالية</span>
-                            <span class="en-text">Integration with existing systems</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span class="ar-text" dir="rtl">تحديثات مجانية</span>
-                            <span class="en-text">Free updates & improvements</span>
-                        </li>
-                    </ul>
-                    <a href="https://buy.stripe.com/test_6oU3cvgY24ozcgJ9gH3ks00" target="_blank" rel="noopener noreferrer" class="pricing-button">
-                        <span class="ar-text" dir="rtl">ابدأ الآن</span>
-                        <span class="en-text">Get Started</span>
-                    </a>
+                    
+                    <!-- Stripe Payment Element will be inserted here -->
+                    <div id="payment-element"></div>
+                    
+                    <button type="submit" class="submit-button" id="submitButton">
+                        <i class="fas fa-lock"></i>
+                        <span class="ar-text" dir="rtl">ادفع الآن وابدأ ($99)</span>
+                        <span class="en-text">Pay Now & Start ($99)</span>
+                    </button>
+                    
+                    <p class="secure-note">
+                        <i class="fas fa-shield-alt"></i>
+                        <span class="ar-text" dir="rtl">دفع آمن عبر Stripe | بيانات محمية 256-bit SSL</span>
+                        <span class="en-text">Secure payment via Stripe | 256-bit SSL encrypted</span>
+                    </p>
+                    
+                    <div id="payment-message" class="payment-message"></div>
+                </form>
+                
+                <div class="trust-badges">
+                    <div class="badge">
+                        <i class="fas fa-server"></i>
+                        <span class="ar-text" dir="rtl">بيانات محلية 100%</span>
+                        <span class="en-text">100% Local Data</span>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-shield-check"></i>
+                        <span class="ar-text" dir="rtl">معتمد SDAIA</span>
+                        <span class="en-text">SDAIA Compliant</span>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-award"></i>
+                        <span class="ar-text" dir="rtl">شريك رؤية 2030</span>
+                        <span class="en-text">Vision 2030 Partner</span>
+                    </div>
                 </div>
-
-                <!-- Annual Plan -->
-                <div class="pricing-card featured">
-                    <div class="popular-badge">
-                        <i class="fas fa-star"></i>
-                        <span class="ar-text" dir="rtl">الأكثر شعبية</span>
-                        <span class="en-text">Most Popular</span>
-                    </div>
-                    <div class="pricing-header">
-                        <h3 class="ar-text" dir="rtl">الخطة السنوية</h3>
-                        <h3 class="en-text">Annual Plan</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">699</span>
-                            <span class="period">/year</span>
-                        </div>
-                        <div class="savings">
-                            <span class="ar-text" dir="rtl">وفر 41% (بدلاً من $1,188)</span>
-                            <span class="en-text">Save 41% (Instead of $1,188)</span>
-                        </div>
-                    </div>
-                    <ul class="pricing-features">
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span class="ar-text" dir="rtl">3 وكلاء أذكياء مخصصين</span>
-                            <span class="en-text">3 Custom AI Agents</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span class="ar-text" dir="rtl">50,000 محادثة شهرياً</span>
-                            <span class="en-text">50,000 conversations/month</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span class="ar-text" dir="rtl">دعم فني أولوية على مدار الساعة</span>
-                            <span class="en-text">24/7 Priority Technical Support</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span class="ar-text" dir="rtl">تكامل متقدم + API</span>
-                            <span class="en-text">Advanced Integration + API Access</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span class="ar-text" dir="rtl">تدريب وإعداد مجاني</span>
-                            <span class="en-text">Free Training & Onboarding</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span class="ar-text" dir="rtl">تقارير تحليلية متقدمة</span>
-                            <span class="en-text">Advanced Analytics Reports</span>
-                        </li>
-                    </ul>
-                    <a href="https://buy.stripe.com/test_8x24gz4bgaMX80t2Sj3ks01" target="_blank" rel="noopener noreferrer" class="pricing-button">
-                        <span class="ar-text" dir="rtl">ابدأ الآن</span>
-                        <span class="en-text">Get Started</span>
-                    </a>
-                </div>
-
-                <!-- Lifetime Plan -->
-                <div class="pricing-card">
-                    <div class="limited-badge">
-                        <i class="fas fa-bolt"></i>
-                        <span class="ar-text" dir="rtl">عرض محدود: 100 مقعد فقط</span>
-                        <span class="en-text">Limited: Only 100 Spots</span>
-                    </div>
-                    <div class="pricing-header">
-                        <h3 class="ar-text" dir="rtl">الخطة مدى الحياة</h3>
-                        <h3 class="en-text">Lifetime Plan</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">1,997</span>
-                            <span class="period ar-text" dir="rtl">مرة واحدة</span>
-                            <span class="period en-text">one-time</span>
-                        </div>
-                        <div class="savings">
-                            <span class="ar-text" dir="rtl">وفر $6,391 على 10 سنوات</span>
-                            <span class="en-text">Save $6,391 over 10 years</span>
-                        </div>
-                    </div>
-                    <ul class="pricing-features">
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span class="ar-text" dir="rtl">10 وكلاء أذكياء مخصصين</span>
-                            <span class="en-text">10 Custom AI Agents</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span class="ar-text" dir="rtl">محادثات غير محدودة</span>
-                            <span class="en-text">Unlimited conversations</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span class="ar-text" dir="rtl">دعم VIP مخصص 24/7</span>
-                            <span class="en-text">24/7 Dedicated VIP Support</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span class="ar-text" dir="rtl">API كامل + تكامل مخصص</span>
-                            <span class="en-text">Full API + Custom Integrations</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span class="ar-text" dir="rtl">تحديثات وميزات جديدة مدى الحياة</span>
-                            <span class="en-text">Lifetime updates & new features</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span class="ar-text" dir="rtl">استشارات شهرية مع خبراء الذكاء الاصطناعي</span>
-                            <span class="en-text">Monthly AI strategy consultations</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span class="ar-text" dir="rtl">ضمان استرداد 90 يوماً</span>
-                            <span class="en-text">90-day money-back guarantee</span>
-                        </li>
-                    </ul>
-                    <a href="https://buy.stripe.com/test_dRmaEX5fk3kvbcF9gH3ks02" target="_blank" rel="noopener noreferrer" class="pricing-button">
-                        <span class="ar-text" dir="rtl">احجز الآن</span>
-                        <span class="en-text">Reserve Now</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="pricing-note">
-                <p>
-                    <i class="fas fa-info-circle"></i>
-                    <span class="ar-text" dir="rtl">جميع الأسعار بالدولار الأمريكي. نقبل مدى، فيزا، ماستركارد، وأمريكان إكسبريس.</span>
-                    <span class="en-text">All prices in USD. We accept Mada, Visa, Mastercard, and American Express.</span>
-                </p>
             </div>
         </div>
     </section>
-
-
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <h3>GrokArabia</h3>
-                    <p class="ar-text" dir="rtl">منصة سيادية للذكاء الاصطناعي العربي</p>
-                    <p class="en-text">Sovereign Arabic AI Platform</p>
+                    <h3>Sayada</h3>
+                    <p class="ar-text" dir="rtl">البنية التحتية السيادية للبيانات في منطقة الشرق الأوسط</p>
+                    <p class="en-text">The Sovereign Data Infrastructure for MENA</p>
                 </div>
                 
                 <div class="footer-links">
@@ -478,8 +407,8 @@
                             <li><a href="#features" class="en-text">Services</a></li>
                             <li><a href="#demo" class="ar-text" dir="rtl">العرض التوضيحي</a></li>
                             <li><a href="#demo" class="en-text">Demo</a></li>
-                            <li><a href="#pricing" class="ar-text" dir="rtl">التسعير</a></li>
-                            <li><a href="#pricing" class="en-text">Pricing</a></li>
+                            <li><a href="#signup" class="ar-text" dir="rtl">التسعير</a></li>
+                            <li><a href="#signup" class="en-text">Pricing</a></li>
                         </ul>
                     </div>
                     
@@ -487,7 +416,7 @@
                         <h4 class="ar-text" dir="rtl">تواصل معنا</h4>
                         <h4 class="en-text">Contact</h4>
                         <ul>
-                            <li><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3f565159507f584d50545e4d5e5d565e115c5052">[email&#160;protected]</a></li>
+                            <li><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="71121e1f05101205310210081015105f1018">[email&#160;protected]</a></li>
                             <li><i class="fas fa-phone"></i> +966 xx xxx xxxx</li>
                             <li><i class="fas fa-map-marker-alt"></i> Riyadh, Saudi Arabia</li>
                         </ul>
@@ -495,18 +424,14 @@
                 </div>
             </div>
             
-            <div class="footer-disclaimer">
-                <p>
-                    <i class="fas fa-info-circle"></i>
-                    <span class="ar-text" dir="rtl">إخلاء المسؤولية: GrokArabia هي منصة مستقلة للذكاء الاصطناعي العربي ولا ترتبط بأي جهة أو شركة أخرى. جميع العلامات التجارية المذكورة هي ملك لأصحابها المعنيين.</span>
-                    <span class="en-text">Disclaimer: GrokArabia is an independent Arabic AI platform and is not affiliated with any other entity or company. All trademarks mentioned are property of their respective owners.</span>
-                </p>
-            </div>
-
             <div class="footer-bottom">
                 <p>
-                    <span class="ar-text" dir="rtl">© 2025 GrokArabia. جميع الحقوق محفوظة</span>
-                    <span class="en-text">© 2025 GrokArabia. All Rights Reserved</span>
+                    <span class="ar-text" dir="rtl">© 2025 سيادة. جميع الحقوق محفوظة | بنيت لرؤية 2030. سيادة البيانات أولاً.</span>
+                    <span class="en-text">© 2025 Sayada. All Rights Reserved | Built for Vision 2030. Data Sovereignty First.</span>
+                </p>
+                <p class="disclaimer">
+                    <span class="ar-text" dir="rtl">سيادة هي كيان ذكاء اصطناعي سيادي مستقل وغير تابع لأي مزود بيانات خارجي. جميع معالجات البيانات تتوافق مع معايير السيادة الإقليمية.</span>
+                    <span class="en-text">Sayada is an independent Sovereign AI entity and is not affiliated with xAI, Grok, or any external data providers. All data processing adheres to regional sovereignty standards.</span>
                 </p>
                 <div class="social-links">
                     <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -517,6 +442,6 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="main.js"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.js"></script>
 </body>
 </html>

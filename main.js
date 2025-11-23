@@ -1,13 +1,16 @@
 // ===========================
-// GrokArabia - Main JavaScript
+// Sayada - Main JavaScript
 // ===========================
 
 // Configuration
 const CONFIG = {
     stripePublishableKey: 'pk_test_YOUR_STRIPE_PUBLISHABLE_KEY', // Replace with your Stripe publishable key
+    initialSpots: 47,
+    countdownInterval: 120000, // 2 minutes in milliseconds
 };
 
 // Global state
+let spotCount = CONFIG.initialSpots;
 let stripe = null;
 let elements = null;
 let currentLanguage = 'ar'; // Default to Arabic
@@ -38,25 +41,71 @@ function initLanguageToggle() {
             }
             
             // Update form select options based on language
-            updateSelectLanguage('industry', lang);
-            updateSelectLanguage('plan', lang);
+            updateFormLanguage(lang);
         });
     });
 }
 
-function updateSelectLanguage(selectId, lang) {
-    const select = document.getElementById(selectId);
-    if (!select) return;
+function updateFormLanguage(lang) {
+    const industrySelect = document.getElementById('industry');
+    if (!industrySelect) return;
     
-    // Update all option texts based on data attributes
-    Array.from(select.options).forEach(option => {
-        const arText = option.getAttribute('data-ar');
-        const enText = option.getAttribute('data-en');
-        
-        if (arText && enText) {
-            option.textContent = lang === 'ar' ? arText : enText;
-        }
+    // Clear existing options except the first one
+    while (industrySelect.options.length > 1) {
+        industrySelect.remove(1);
+    }
+    
+    // Update placeholder option
+    industrySelect.options[0].text = lang === 'ar' ? 'اختر القطاع' : 'Select Industry';
+    
+    // Add options based on language
+    const industries = lang === 'ar' ? 
+        [
+            { value: 'ecommerce', text: 'التجارة الإلكترونية' },
+            { value: 'realestate', text: 'العقارات' },
+            { value: 'hr', text: 'الموارد البشرية' },
+            { value: 'oilgas', text: 'النفط والغاز' },
+            { value: 'finance', text: 'التمويل' },
+            { value: 'other', text: 'أخرى' }
+        ] : 
+        [
+            { value: 'ecommerce', text: 'E-Commerce' },
+            { value: 'realestate', text: 'Real Estate' },
+            { value: 'hr', text: 'HR & Recruitment' },
+            { value: 'oilgas', text: 'Oil & Gas' },
+            { value: 'finance', text: 'Finance' },
+            { value: 'other', text: 'Other' }
+        ];
+    
+    industries.forEach(industry => {
+        const option = document.createElement('option');
+        option.value = industry.value;
+        option.text = industry.text;
+        industrySelect.add(option);
     });
+}
+
+// ===========================
+// Countdown Timer
+// ===========================
+function initCountdown() {
+    const countdownElement = document.getElementById('countdown');
+    
+    if (!countdownElement) return;
+    
+    // Decrease spot count periodically
+    setInterval(() => {
+        if (spotCount > 10) {
+            spotCount--;
+            countdownElement.textContent = spotCount;
+            
+            // Add animation
+            countdownElement.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                countdownElement.style.transform = 'scale(1)';
+            }, 300);
+        }
+    }, CONFIG.countdownInterval);
 }
 
 // ===========================
@@ -65,11 +114,8 @@ function updateSelectLanguage(selectId, lang) {
 function initSmoothScrolling() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-            if (href === '#' || !href) return;
-            
             e.preventDefault();
-            const target = document.querySelector(href);
+            const target = document.querySelector(this.getAttribute('href'));
             if (target) {
                 target.scrollIntoView({
                     behavior: 'smooth',
@@ -78,6 +124,20 @@ function initSmoothScrolling() {
             }
         });
     });
+    
+    // Scroll to signup when CTA button is clicked
+    const ctaButton = document.getElementById('ctaButton');
+    if (ctaButton) {
+        ctaButton.addEventListener('click', () => {
+            const signupSection = document.getElementById('signup');
+            if (signupSection) {
+                signupSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    }
 }
 
 // ===========================
@@ -98,8 +158,8 @@ function initScrollAnimations() {
         });
     }, observerOptions);
     
-    // Observe feature cards and pricing cards
-    document.querySelectorAll('.feature-card, .pricing-card').forEach((card, index) => {
+    // Observe feature cards
+    document.querySelectorAll('.feature-card').forEach((card, index) => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
         card.style.transition = `all 0.6s ease-out ${index * 0.1}s`;
@@ -144,8 +204,7 @@ async function handleFormSubmit(e) {
         companyName: document.getElementById('companyName').value.trim(),
         email: document.getElementById('email').value.trim(),
         phone: document.getElementById('phone').value.trim(),
-        industry: document.getElementById('industry').value,
-        plan: document.getElementById('plan') ? document.getElementById('plan').value : 'monthly'
+        industry: document.getElementById('industry').value
     };
     
     // Basic validation
@@ -173,7 +232,6 @@ async function handleFormSubmit(e) {
     
     // Disable submit button
     submitButton.disabled = true;
-    const originalHTML = submitButton.innerHTML;
     submitButton.innerHTML = currentLanguage === 'ar' ? 
         '<i class="fas fa-spinner fa-spin"></i> جاري المعالجة...' : 
         '<i class="fas fa-spinner fa-spin"></i> Processing...';
@@ -181,7 +239,7 @@ async function handleFormSubmit(e) {
     try {
         // In production, you would:
         // 1. Send form data to your backend
-        // 2. Create a Stripe payment intent based on selected plan
+        // 2. Create a Stripe payment intent
         // 3. Confirm the payment
         // 4. Handle the response
         
@@ -199,6 +257,15 @@ async function handleFormSubmit(e) {
         // Reset form
         document.getElementById('signupForm').reset();
         
+        // Decrement spot count
+        if (spotCount > 10) {
+            spotCount--;
+            const countdownElement = document.getElementById('countdown');
+            if (countdownElement) {
+                countdownElement.textContent = spotCount;
+            }
+        }
+        
     } catch (error) {
         console.error('Payment error:', error);
         showPaymentMessage(
@@ -210,7 +277,9 @@ async function handleFormSubmit(e) {
     } finally {
         // Re-enable submit button
         submitButton.disabled = false;
-        submitButton.innerHTML = originalHTML;
+        submitButton.innerHTML = currentLanguage === 'ar' ? 
+            '<i class="fas fa-lock"></i> <span class="ar-text" dir="rtl">ادفع الآن وابدأ ($99)</span>' : 
+            '<i class="fas fa-lock"></i> <span class="en-text">Pay Now & Start ($99)</span>';
     }
 }
 
@@ -277,17 +346,18 @@ function trackEvent(eventName, eventData) {
     // }
 }
 
-// Track interactions
+// Track CTA clicks
 function initAnalytics() {
-    // Track pricing card clicks
-    document.querySelectorAll('.pricing-button').forEach((btn, index) => {
-        btn.addEventListener('click', () => {
-            trackEvent('pricing_click', {
-                plan_index: index,
+    // Track main CTA button clicks
+    const ctaButton = document.getElementById('ctaButton');
+    if (ctaButton) {
+        ctaButton.addEventListener('click', () => {
+            trackEvent('cta_click', {
+                location: 'hero',
                 language: currentLanguage
             });
         });
-    });
+    }
     
     // Track form submission
     const form = document.getElementById('signupForm');
@@ -314,19 +384,19 @@ function initAnalytics() {
 // Initialize Everything
 // ===========================
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🚀 GrokArabia - Initializing...');
+    console.log('🚀 Sayada - Initializing...');
     
     // Initialize all features
     initLanguageToggle();
+    initCountdown();
     initSmoothScrolling();
     initScrollAnimations();
     initStripePayment();
     lazyLoadImages();
     initAnalytics();
     
-    // Set default language display for select elements
-    updateSelectLanguage('industry', currentLanguage);
-    updateSelectLanguage('plan', currentLanguage);
+    // Set default language display
+    updateFormLanguage(currentLanguage);
     
     console.log('✓ All features initialized successfully');
 });
